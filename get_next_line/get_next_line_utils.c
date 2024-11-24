@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/14 13:53:55 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/11/19 15:47:29 by rbagin        ########   odam.nl         */
+/*   Updated: 2024/11/21 16:55:43 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
@@ -90,22 +88,31 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
-	char	*str1;
-	char	*str2;
 	size_t	str_len;
+	size_t	i;
+	size_t	j;
 
-	str1 = (char *)s1;
-	str2 = (char *)s2;
 	if (!s1 || !s2)
 		return (NULL);
 	str_len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
 	str = (char *)malloc(sizeof(char) * (str_len));
 	if (str == NULL)
 		return (NULL);
-	ft_strlcpy(str, str1, str_len);
-	ft_strlcat(str, str2, str_len);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
 	return (str);
 }
